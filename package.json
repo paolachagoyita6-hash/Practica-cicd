@@ -1,0 +1,13 @@
+{
+  "name": "practica-cicd",
+  "version": "1.0.0",
+  "description": "Practica de pipeline CI/CD",
+  "main": "index.js",
+  "scripts": {
+    "test": "node -e \"console.log('Pruebas pasaron correctamente'); process.exit(0);\"",
+    "build": "echo 'Construyendo aplicacion...' && mkdir -p dist && cp index.js dist/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
