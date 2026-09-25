@@ -1,0 +1,40 @@
+name: Pipeline CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Obtener código del repositorio
+      uses: actions/checkout@v4
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Instalar dependencias
+      run: npm ci
+
+    - name: Ejecutar pruebas unitarias
+      run: npm test
+
+    - name: Construir proyecto
+      run: npm run build
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Desplegar aplicación
+      run: |
+        echo "Conectando al servidor de producción..."
+        echo "Desplegando artefactos..."
